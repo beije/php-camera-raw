@@ -1,0 +1,25 @@
+{
+    "name": "vkollin/php-camera-raw",
+    "type": "library",
+    "description": "A class that can fetch preview images from camera raw files.",
+    "keywords": [
+        "image",
+        "raw",
+        "laravel"
+    ],
+    "homepage": "https://github.com/beije/php-camera-raw",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Benjamin Horn",
+            "email": "beije@benjaminhorn.se",
+            "homepage": "http://benjaminhorn.io",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+          "Beije\\CamaraRaw": "src/"
+        }
+    }
+}
