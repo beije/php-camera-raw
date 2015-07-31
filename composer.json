@@ -18,8 +18,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-          "Beije\\CamaraRaw": "src/"
+        "psr-4": {
+          "Beije\\Cameraraw": "src/Beije/Cameraraw"
         }
     }
 }
