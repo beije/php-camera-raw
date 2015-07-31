@@ -12,9 +12,9 @@
 *
 */
 
-namespace Beije\Cameraraw
+namespace Beije\CameraRaw
 
-class Cameraraw {
+class CameraRaw {
 	/**
 	* @var	array	an array containing popular raw file format extensions
 	*/
