@@ -17,23 +17,7 @@ class CameraRaw
     /**
      * @var array an array containing popular raw file format extensions
      */
-    private static $rawExtensions = array('.ari','.arw','.bay','.crw','.cr2','.cap','.dcs','.dcr','.dng','.drf','.eip','.erf','.fff','.iiq','.k25','.kdc','.mdc','.mef','.mos','.mrw','.nef','.nrw','.obm','.orf','.pef','.ptx','.pxn','.r3d','.raf','.raw','.rwl','.rw2','.rwz','.sr2','.srf','.srw', '.x3f');
-
-    /**
-     * Checks if a file exists based on the filepath.
-     *
-     * @param string $filePath the path to the file
-     *
-     * @return bool returns true if the file exists
-     */
-    private static function checkFile($filePath)
-    {
-        if (file_exists($filePath)) {
-            return true;
-        }
-
-        return false;
-    }
+    private static $rawExtensions = array('ari','arw','bay','crw','cr2','cap','dcs','dcr','dng','drf','eip','erf','fff','iiq','k25','kdc','mdc','mef','mos','mrw','nef','nrw','obm','orf','pef','ptx','pxn','r3d','raf','raw','rwl','rw2','rwz','sr2','srf','srw', 'x3f');
 
     /**
      * Checks if a file is a raw file based on file extension.
@@ -44,12 +28,7 @@ class CameraRaw
      */
     public static function isRawFile($filePath)
     {
-        $fileExtension = '.'.pathinfo($filePath, PATHINFO_EXTENSION);
-        if (in_array(strToLower($fileExtension), self::$rawExtensions)) {
-            return true;
-        }
-
-        return false;
+        return in_array(strToLower(pathinfo($filePath, PATHINFO_EXTENSION)), self::$rawExtensions);
     }
 
     /**
@@ -61,7 +40,7 @@ class CameraRaw
      */
     public static function embeddedPreviews($filePath)
     {
-        if (!self::checkFile($filePath)) {
+        if (!file_exists($filePath)) {
             throw new \InvalidArgumentException('Incorrect filepath given');
         }
 
@@ -83,10 +62,11 @@ class CameraRaw
      * @param int    $quality        the quality of the new image (0-100)
      *
      * @throws \InvalidArgumentException
+     * @throws \ImagickException
      */
     public static function generateImage($sourceFilePath, $targetFilePath, $width, $height, $quality = 60)
     {
-        if (!self::checkFile($sourceFilePath)) {
+        if (!file_exists($sourceFilePath)) {
             throw new \InvalidArgumentException('Incorrect filepath given');
         }
 
@@ -114,7 +94,7 @@ class CameraRaw
     public static function extractPreview($sourceFilePath, $targetFilePath, $previewNumber = null)
     {
         // check that the source file exists.
-        if (!self::checkFile($sourceFilePath)) {
+        if (!file_exists($sourceFilePath)) {
             throw new \InvalidArgumentException('Incorrect source filepath given '.$sourceFilePath);
         }
 
@@ -138,7 +118,7 @@ class CameraRaw
         $previewFilePath = sys_get_temp_dir().DIRECTORY_SEPARATOR.$filename.'-preview'.$previewNumber.'.jpg';
 
         // check that the preview got saved correctly
-        if (!self::checkFile($previewFilePath)) {
+        if (!file_exists($previewFilePath)) {
             throw new \Exception('No preview file.');
         }
 
